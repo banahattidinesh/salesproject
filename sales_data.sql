@@ -1,1 +1,1 @@
-select * from sales;
+SELECT * FROM sales WHERE amount > 500;
