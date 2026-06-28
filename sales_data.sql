@@ -1,1 +1,1 @@
-SELECT * FROM sales WHERE amount > 500;
+DROP TABLE IF EXISTS sales;
