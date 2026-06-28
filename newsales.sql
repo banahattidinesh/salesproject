@@ -58,3 +58,20 @@ from registered_users a
 LEFT JOIN print_orders b ON a.username = b.customer_name
 where b.order_id is NULL;
 
+select customer_name, order_date, product_category, 
+ ROW_NUMBER() OVER(PARTITION BY customer_name ORDER BY order_date ASC) AS order_rank
+ from print_orders;
+
+
+ select customer_name, order_date, product_category, 
+ lag(order_date) OVER(PARTITION BY customer_name ORDER BY order_date ASC) AS previous_order_date 
+ from print_orders;
+
+
+create view customer_velocity as
+ select customer_name, order_date, product_category, 
+ lag(order_date) OVER(PARTITION BY customer_name ORDER BY order_date ASC) AS previous_order_date 
+ from print_orders;
+
+
+select * from customer_velocity;
